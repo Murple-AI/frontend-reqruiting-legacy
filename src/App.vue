@@ -1,5 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import BaseCard from "./components/BaseCard.vue";
+import SignUpForm from "./components/SignUpForm.vue";
+</script>
 
 <template>
-  <h1 class="text-3xl font-bold underline">Hello world!</h1>
+  <div class="flex flex-col justify-center h-screen w-screen items-center">
+    <BaseCard>
+      <template #title>Sign Up</template>
+      <template #content>
+        <SignUpForm id="signUpForm" />
+      </template>
+    </BaseCard>
+  </div>
 </template>
