@@ -1,16 +1,41 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import InputText from './InputText.vue';
-import ValildationBox from './ValildationBox.vue';
+import ValidationText from './ValidationText.vue';
+import {
+  getNameValidationText,
+  getOrganizationValidationText,
+  getUserIdValidationText,
+} from '@/utils/validations';
 
 const userId = ref('');
 const name = ref('');
 const organization = ref('');
 
+const userIdValidationText = computed(() =>
+  getUserIdValidationText(userId.value)
+);
+const nameValidationText = computed(() => getNameValidationText(name.value));
+const organizationValidationText = computed(() =>
+  getOrganizationValidationText(organization.value)
+);
+
+const isValid = computed(() => {
+  return (
+    userIdValidationText.value === '' &&
+    nameValidationText.value === '' &&
+    organizationValidationText.value === ''
+  );
+});
+
 const handleSubmit = () => {
+  if (!isValid.value) {
+    return;
+  }
+
   alert(`User ID: ${userId.value}
-Name: ${name.value}
-Organization: ${organization.value}`);
+  Name: ${name.value}
+  Organization: ${organization.value}`);
 };
 </script>
 
@@ -18,11 +43,11 @@ Organization: ${organization.value}`);
   <form class="flex flex-col gap-4 py-4" @submit.prevent="handleSubmit">
     <div>
       <InputText label="User ID" v-model="userId" :required="true" />
-      <ValildationBox />
+      <ValidationText :text="userIdValidationText" />
     </div>
     <div>
       <InputText label="Name" v-model="name" :required="true" />
-      <ValildationBox />
+      <ValidationText :text="nameValidationText" />
     </div>
     <div>
       <InputText
@@ -30,9 +55,18 @@ Organization: ${organization.value}`);
         v-model="organization"
         :required="false"
       />
-      <ValildationBox />
+      <ValidationText :text="organizationValidationText" />
     </div>
 
-    <button class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
+    <button
+      :class="[
+        isValid
+          ? 'bg-blue-500 cursor-pointer'
+          : 'bg-gray-400 cursor-not-allowed',
+        'text-white px-4 py-2 rounded-md',
+      ]"
+    >
+      Submit
+    </button>
   </form>
 </template>
