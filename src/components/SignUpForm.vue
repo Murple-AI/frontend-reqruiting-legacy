@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import InputText from "./InputText.vue";
-const userId = ref("");
-const name = ref("");
-const organization = ref("");
+import { ref } from 'vue';
+import InputText from './InputText.vue';
+
+const userId = ref('');
+const name = ref('');
+const organization = ref('');
+
 const handleSubmit = () => {
   alert(`User ID: ${userId.value}
 Name: ${name.value}

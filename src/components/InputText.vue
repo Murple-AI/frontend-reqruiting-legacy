@@ -1,16 +1,25 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 type InputTextProps = {
   label: string;
 };
+
 const model = defineModel<string>();
 defineProps<InputTextProps>();
 
-const handleFocus = () => {
-  console.log('focus');
-};
+// const isFocus = ref(false);
+
+// const handleFocus = () => {
+//   isFocus.value = true;
+// };
+
+// const handleBlur = () => {
+//   isFocus.value = false;
+// };
 
 const handleDeleteClick = () => {
-  console.log('/');
+  model.value = '';
 };
 </script>
 
@@ -23,7 +32,6 @@ const handleDeleteClick = () => {
         type="text"
         autocomplete="off"
         v-model="model"
-        @focus="handleFocus"
       />
       <div
         class="absolute top-[10px] right-[10px] bg-black w-[20px] h-[20px] text-white flex items-center justify-center cursor-pointer rounded-full opacity-50"
