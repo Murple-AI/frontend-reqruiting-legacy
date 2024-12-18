@@ -42,15 +42,26 @@ const handleSubmit = () => {
 <template>
   <form class="flex flex-col gap-4 py-4" @submit.prevent="handleSubmit">
     <div>
-      <InputText label="User ID" v-model="userId" :required="true" />
+      <InputText
+        element-id="user-id"
+        label="User ID"
+        v-model="userId"
+        :required="true"
+      />
       <ValidationText :text="userIdValidationText" />
     </div>
     <div>
-      <InputText label="Name" v-model="name" :required="true" />
+      <InputText
+        element-id="name"
+        label="Name"
+        v-model="name"
+        :required="true"
+      />
       <ValidationText :text="nameValidationText" />
     </div>
     <div>
       <InputText
+        element-id="organization"
         label="Organization"
         v-model="organization"
         :required="false"
