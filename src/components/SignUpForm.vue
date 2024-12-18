@@ -8,10 +8,12 @@ import {
   getUserIdValidationText,
 } from '@/utils/validations';
 
+// input에 작성될 value state
 const userId = ref('');
 const name = ref('');
 const organization = ref('');
 
+// 유효성 검사용 text
 const userIdValidationText = computed(() =>
   getUserIdValidationText(userId.value)
 );
@@ -20,6 +22,7 @@ const organizationValidationText = computed(() =>
   getOrganizationValidationText(organization.value)
 );
 
+// 모든 유효성 검사를 통과했는지 여부를 판별하는 flag
 const isValid = computed(() => {
   return (
     userIdValidationText.value === '' &&

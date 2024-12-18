@@ -8,11 +8,11 @@ type InputTextProps = {
 };
 
 const model = defineModel<string>();
-const { elementId } = defineProps<InputTextProps>();
+const { elementId } = defineProps<InputTextProps>(); // 개별 input element에 focus를 하기 위해 id를 props르 받아옴
 
-const isFocus = ref(false);
-const isValue = computed(() => Boolean(model.value));
-const isClick = ref(false);
+const isFocus = ref(false); // focus 여부 판별 flag
+const isValue = computed(() => Boolean(model.value)); // input에 글이 작성되어 있는지 판별하는 flag
+const isClick = ref(false); // input의 blur 이벤트가 delete 버튼 클릭에 의한 것인지 판별하는 flag
 
 const handleFocus = () => {
   isFocus.value = true;
@@ -35,6 +35,7 @@ const handleDeleteClick = () => {
   isClick.value = true;
   model.value = '';
 
+  // 컴포넌트가 mounted 된 후 포커스
   nextTick(() => {
     document.getElementById(elementId)?.focus();
   });
